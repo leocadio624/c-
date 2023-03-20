@@ -8,9 +8,10 @@ typedef struct Elemento{
     struct Elemento *siguiente;
 }nodo; 
 
-void imprimir(nodo **cabeza);
 void insertarPrimero(nodo **cabeza, item entrada);
+void insertarFinal(nodo **cabeza, item entrada);
 nodo *crearNodo(item x);
+void imprimir(nodo *cabeza);
 
 
 /*
@@ -19,21 +20,48 @@ cabeza -> 1 -> 2 -> 3->Null
 */
 int main(){
 
-    nodo *cabeza;
+    nodo *cabeza, *ultimo;
     cabeza = NULL;
     
-    for(int i = 0; i< 30; i++)
+    
+    for(int i = 0; i<= 5; i++)
         insertarPrimero(&cabeza, i);
+    
 
-    imprimir(&cabeza);
-
+    
+    insertarFinal(&cabeza, 555);
+    insertarFinal(&cabeza, 556);
     
     
     
+    
 
+    imprimir(cabeza);
+    
+    //printf("%p\n", cabeza->siguiente);
+    
+    
+
+    
+    
+
+
+    /*
+    ultimo = cabeza;
+    for(; ultimo -> siguiente;){
+        ultimo = ultimo -> siguiente;
+        printf("\n %d \n", ultimo-> dato);
+    }
+    */
+
+
+    
+    
 
     return 0;
 }
+
+
 /*
 **********************
 Autor : Eduardo Bernal
@@ -47,6 +75,32 @@ void insertarPrimero(nodo **cabeza, item entrada){
     nuevo = crearNodo(entrada);
     nuevo -> siguiente = *cabeza;
     *cabeza = nuevo;
+
+}
+/*
+**********************
+Autor : Eduardo Bernal
+Fecha : 19/03/2023
+Descp : Inserta un nodo al principio
+        de la lista (por la cabeza)
+**********************
+*/
+void insertarFinal(nodo **cabeza, item entrada){
+    nodo *ultimo;
+    ultimo = *cabeza;
+
+    if(ultimo == NULL){
+        *cabeza = crearNodo(entrada);
+    }else{
+
+        for(; ultimo -> siguiente; ){
+            ultimo = ultimo -> siguiente;
+        }
+
+        ultimo -> siguiente = crearNodo(entrada);
+        
+    }
+
 
 }
 /*
@@ -70,14 +124,15 @@ Fecha : 19/03/2023
 Descp : Imprime la lista enlazada
 **********************
 */
-void imprimir(nodo **cabeza){
-	nodo *ptr;
-	ptr=*cabeza;
-	printf("Inicio");
-	for(;ptr->siguiente;){
-		printf("->%d,", ptr->dato);
-		ptr=ptr->siguiente;
+void imprimir(nodo *cabeza){
+
+	int k;
+	printf("\n\t\t Lista ordenada \n");
+	for(k=0; cabeza; cabeza = cabeza -> siguiente){
+		printf(" %d", cabeza->dato);
 	}
+    
+    
 
 	printf("\n");
 }

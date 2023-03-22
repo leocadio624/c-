@@ -24,6 +24,14 @@ void paso(int **puntero){
 
 }
 
+void pasoValor(int *puntero){
+
+    printf("Paso por valor\n");
+    printf("%d\n", *puntero);
+    printf("%p\n", puntero);
+
+}
+
 
 int main(){
     
@@ -31,15 +39,23 @@ int main(){
 
     int *puntero = &a;
 
+    if(!b)
+        printf("if");
     
+    
+    
+    /*
     printf("%d\n", *puntero);
     printf("%p\n", puntero);
     printf("%p\n", &a);
-
-    paso(&puntero);
-
-    /*
     */
+    
+
+
+    //paso(&puntero);
+    //pasoValor(puntero);
+    
+    
 
     
     /*

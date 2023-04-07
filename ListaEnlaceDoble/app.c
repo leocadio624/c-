@@ -10,6 +10,7 @@ typedef struct Elemento{
 }nodo;
 
 
+void insertarPosicion(nodo **cabeza, item buscado, item entrada);
 void insertarPrimero(nodo **cabeza, item entrada);
 void recorrer(nodo *puntero);
 nodo *crearNodo(item x);
@@ -19,13 +20,84 @@ int main(){
     nodo *cabeza;
     cabeza = NULL;
 
-    for(int i = 0; i<= 10; i++)
+    for(int i = 0; i<= 5; i++){
         insertarPrimero(&cabeza, i);
-
+    }
     recorrer(cabeza);
+
+    insertarPosicion(&cabeza, 5, 555);
+    recorrer(cabeza);
+
+
+
 
     return 0;
 }
+
+/*
+**********************
+Autor : Eduardo Bernal
+Fecha : 22/03/2023
+Descp : Crea un nodo y regresa la referencia del objeto
+**********************
+*/
+void insertarPosicion(nodo **cabeza, item buscado, item entrada){
+
+    nodo *anterior, *actual;
+    nodo *nuevo;
+
+    int encontrado = 0;
+    anterior = actual = *cabeza;
+
+
+    while((actual != NULL) && (!encontrado)){
+        encontrado = (actual -> dato == buscado);
+
+        if(!encontrado){
+            anterior = actual;
+            actual = actual -> siguiente;
+        }
+
+    }
+
+    if(encontrado){
+        printf("Insertando nodo: %d\n", entrada);
+        nuevo = crearNodo(entrada);
+        nuevo -> siguiente = anterior -> siguiente;
+
+        if(anterior -> siguiente != NULL)
+            anterior -> siguiente -> atras = nuevo;
+
+        anterior -> siguiente = nuevo;
+        nuevo -> atras = anterior;
+
+
+    }else{
+        printf("No se encontro el nodo\n");
+    }
+
+    /*
+    while((puntero -> siguiente != NULL) && (puntero -> dato != buscado)){
+
+        anterior = puntero;
+        puntero = puntero -> siguiente;
+
+    }
+    printf("%d\n", anterior -> dato);
+    */
+
+    /*
+    if(encontrado == NULL){
+        printf("Encontrado es null\n");
+    }
+    */
+
+    
+    
+
+
+}
+
 
 /*
 **********************
@@ -47,7 +119,6 @@ void insertarPrimero(nodo **cabeza, item entrada){
     *cabeza = nuevo;
     
 }
-
 /*
 **********************
 Autor : Eduardo Bernal
